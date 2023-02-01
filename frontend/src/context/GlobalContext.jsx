@@ -1,9 +1,8 @@
-import axios from 'axios';
 import { useQuery } from 'react-query';
 import marvelAPI from '../api/marvelAPI';
 import heroesManagerAPI from '../api/heroesManagerAPI';
 
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 
 const GlobalContext = createContext({});
 
@@ -11,14 +10,12 @@ function GlobalProvider({ children }) {
   const [pageTitle, setPageTitle] = useState('');
 
   async function getHeroes({ limit = 10, offset = 0 }) {
-    // const res = await marvelAPI.get('/characters', {
-    //   params: {
-    //     limit: limit,
-    //     offset: offset,
-    //   },
-    // });
-
-    const res = await axios.get('/heroes.json');
+    const res = await marvelAPI.get('/characters', {
+      params: {
+        limit: limit,
+        offset: offset,
+      },
+    });
 
     if (!res.status) {
       throw new Error(res.error);
@@ -31,7 +28,7 @@ function GlobalProvider({ children }) {
     data: heroesData,
     isLoading: isLoadingHeroes,
     isError: isErrorHeroes,
-  } = useQuery(['getHeroes'], () => getHeroes({}));
+  } = useQuery(['getHeroes'], () => getHeroes({ offset: 5, limit: 25 }));
 
   async function addHeroeToCandidates(heroe) {
     const res = await heroesManagerAPI.post('/candidates', {
