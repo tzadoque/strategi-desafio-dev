@@ -1,3 +1,7 @@
+# Links para correção
+
+- frontend: https://marvel-heroes-manager.netlify.app/
+- backend (google cloud): https://heroes-manager-api-4pvbdg66ba-uc.a.run.app/docs
 
 <p align="center">
   <img width="460" height="300" src="https://user-images.githubusercontent.com/5932141/160444357-af74d643-62c1-41ce-b8fb-0a13075562db.png">
