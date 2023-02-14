@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import PrevIcon from '../assets/prev.svg';
 import NextIcon from '../assets/next.svg';
 
-// components
-import { PaginationButton } from './Buttons';
+// my components
+import { PaginationButton } from './Button';
 
 const StyledPagination = styled.div`
   display: flex;
@@ -21,6 +21,7 @@ const StyledPagination = styled.div`
     align-items: center;
     min-width: 24px;
     width: fit-content;
+    padding: 0 16px;
   }
 `;
 

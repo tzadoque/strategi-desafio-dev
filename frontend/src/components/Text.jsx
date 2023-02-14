@@ -20,7 +20,7 @@ const Heading3 = styled.h3`
   font-weight: 600;
 `;
 
-const Heading4 = styled.h3`
+const Heading4 = styled.h4`
   font-size: ${props => props.theme.font.heading4};
   font-weight: 500;
 `;

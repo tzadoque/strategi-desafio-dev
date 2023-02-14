@@ -4,17 +4,15 @@ import { useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 // assets
-import PlusIcon from '../assets/plus-lg.svg';
+import ProfileIcon from '../assets/profile.svg';
 
 // my components
-import { Table } from '../components/Table';
 import { MainContainer } from '../components/Container';
 import { Pagination } from '../components/Pagination';
+import { Table } from '../components/Table';
+import { OutlineSecondaryLink } from '../components/Link';
 import { Avatar } from '../components/Image';
 import { BodyText1 } from '../components/Text';
-import { PrimaryButton } from '../components/Button';
-
-// hooks
 import useTruncate from '../hooks/useTruncate';
 
 const data = [
@@ -100,20 +98,18 @@ const data = [
   },
 ];
 
-export default function HomePage() {
+export default function CandidatesPage() {
   const { setHeaderTitle } = useContext(GlobalContext);
 
   useEffect(() => {
-    setHeaderTitle('Heroes - Find candidates to form your teams');
+    setHeaderTitle(
+      'Candidates - Summon the candidates for your team or for the Avengers'
+    );
   }, []);
-
-  const addHeroToCandidates = heroId => {
-    alert(`The hero "#${heroId}" was added to the candidate list.`);
-  };
 
   return (
     <MainContainer>
-      <Table optionName='Add'>
+      <Table optionName='Profile'>
         {data.map(item => (
           <div className='tr' key={item.id}>
             <div className='td'>#{item.id}</div>
@@ -125,9 +121,9 @@ export default function HomePage() {
               <BodyText1>{useTruncate(item.description, 125)}</BodyText1>
             </div>
             <div className='td'>
-              <PrimaryButton onClick={() => addHeroToCandidates(item.id)}>
-                <img src={PlusIcon} alt='' />
-              </PrimaryButton>
+              <OutlineSecondaryLink to={`/candidates/${item.id}`}>
+                <img src={ProfileIcon} alt='' />
+              </OutlineSecondaryLink>
             </div>
           </div>
         ))}

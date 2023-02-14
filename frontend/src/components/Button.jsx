@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
+// assets
+import ArrowLeftIcon from '../assets/arrow-left.svg';
 
 const BaseButton = styled.button`
   all: unset;
@@ -74,10 +78,23 @@ const PaginationButton = styled(BaseButton)`
   padding: 8px;
 `;
 
+const BackButton = () => {
+  const navigate = useNavigate();
+
+  return (
+    <OutlineSecondaryButton onClick={() => navigate(-1)}>
+      <img src={ArrowLeftIcon} alt='arrow back icon' />
+      Back
+    </OutlineSecondaryButton>
+  );
+};
+
 export {
+  BaseButton,
   PrimaryButton,
   SecondaryButton,
   OutlineSecondaryButton,
   CloseButton,
   PaginationButton,
+  BackButton,
 };

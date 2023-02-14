@@ -7,13 +7,17 @@ import { mainTheme } from './theme/index';
 
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
+import { GlobalProvider } from './context/GlobalContext';
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={mainTheme()}>
       <GlobalCss />
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <GlobalProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </GlobalProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

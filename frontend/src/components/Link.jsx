@@ -72,8 +72,39 @@ const SidebarLink = styled(BaseLink)`
   }
 `;
 
+const PrimaryLink = styled(BaseLink)`
+  background-color: ${props => props.theme.colors.marvel_red_1};
+
+  &:hover {
+    background-color: ${props => props.theme.colors.marvel_red_2};
+  }
+`;
+
 const OutlineSecondaryLink = styled(BaseLink)`
   border: 1px solid ${props => props.theme.colors.marvel_grey_1};
 `;
 
-export { BaseLink, OutlineSecondaryLink, SidebarLink };
+const UnstyledLink = styled(NavLink)`
+  text-decoration: none;
+  transition: 0.3s all;
+
+  &:hover {
+    transform: translateY(-5px);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  }
+`;
+
+const UnderlinedTextLink = styled(NavLink)`
+  font-weight: 700;
+`;
+
+export {
+  BaseLink,
+  OutlineSecondaryLink,
+  SidebarLink,
+  PrimaryLink,
+  UnstyledLink,
+  UnderlinedTextLink,
+};

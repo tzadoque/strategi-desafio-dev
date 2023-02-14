@@ -31,6 +31,10 @@ export const GlobalCss = createGlobalStyle`
     justify-content: end;
   }
 
+  .justify-content-center {
+    justify-content: center;
+  }
+
   .align-items-end {
     align-items: flex-end;
   }
@@ -59,5 +63,9 @@ export const GlobalCss = createGlobalStyle`
 
   .mt-auto {
     margin-top: auto;
+  }
+
+  .position-relative {
+    position: relative;
   }
 `;

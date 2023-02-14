@@ -7,6 +7,7 @@ export const mainTheme = () => ({
     marvel_grey_1: '#5C5C5C',
     marvel_red_1: '#F0141E',
     marvel_red_2: '#F3444C',
+    modal_background: 'rgba(17, 18, 21, 0.8)',
     feedback: {
       error: '#DE6D72',
       warning: '#E3C459',
