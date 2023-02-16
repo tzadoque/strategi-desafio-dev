@@ -14,11 +14,17 @@ router = APIRouter()
 
 @router.get("/", response_model=List[TeamResponse])
 def list_teams(db: Session = Depends(get_db)):
+    teams = db.query(Team).filter(Team.id != 1).all()
+    return teams
+
+
+@router.get("/all", response_model=List[TeamResponse])
+def list_all_teams(db: Session = Depends(get_db)):
     teams = db.query(Team).all()
     return teams
 
 
-@router.get("/{id}", response_model=TeamResponse)
+@router.get("/{team_id}", response_model=TeamResponse)
 def get_team_by_id(team_id: int, db: Session = Depends(get_db)) -> TeamResponse:
     team = find_team_by_id(team_id, db)
 
@@ -70,8 +76,10 @@ def update_team(
 @router.delete("/{team_id}", status_code=204)
 def delete_team(team_id: int, db: Session = Depends(get_db)) -> None:
     team = find_team_by_id(team_id, db)
-    db.delete(team)
-    db.commit()
+
+    if team.id != 1:
+        db.delete(team)
+        db.commit()
 
 
 def find_team_by_id(team_id: int, db: Session) -> Team:

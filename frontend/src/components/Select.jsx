@@ -29,25 +29,11 @@ const Arrow = styled.span`
   pointer-events: none;
 `;
 
-const Select = ({ options, selectLabel, ...props }) => {
-  const [value, setValue] = useState('');
-
+const Select = ({ children, ...props }) => {
   return (
     <SelectWrapper>
-      <SelectStyled
-        value={value}
-        onChange={e => setValue(e.target.value)}
-        required
-        {...props}
-      >
-        <option value='' disabled>
-          {selectLabel}
-        </option>
-        {options.map(option => (
-          <option key={option.id} value={option.id}>
-            {option.name}
-          </option>
-        ))}
+      <SelectStyled required {...props}>
+        {children}
       </SelectStyled>
       <Arrow>
         <svg

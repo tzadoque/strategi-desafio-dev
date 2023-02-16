@@ -68,4 +68,8 @@ export const GlobalCss = createGlobalStyle`
   .position-relative {
     position: relative;
   }
+
+  .w-100 {
+    width: 100%;
+  }
 `;

@@ -78,11 +78,11 @@ const PaginationButton = styled(BaseButton)`
   padding: 8px;
 `;
 
-const BackButton = () => {
+const BackButton = ({ path }) => {
   const navigate = useNavigate();
 
   return (
-    <OutlineSecondaryButton onClick={() => navigate(-1)}>
+    <OutlineSecondaryButton onClick={() => navigate(path)}>
       <img src={ArrowLeftIcon} alt='arrow back icon' />
       Back
     </OutlineSecondaryButton>

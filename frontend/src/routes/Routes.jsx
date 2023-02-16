@@ -18,9 +18,9 @@ const AppRoutes = () => {
         <Route exact path='*' element={<NotFoundPage />} />
         <Route exact path='/' element={<HomePage />} />
         <Route exact path='/candidates' element={<CandidatesPage />} />
-        <Route exact path='/candidates/:id' element={<CandidatePage />} />
+        <Route exact path='/candidates/:candidate_id' element={<CandidatePage />} />
         <Route exact path='/teams' element={<TeamsPage />} />
-        <Route exact path='/teams/:id' element={<TeamPage />} />
+        <Route exact path='/teams/:team_id' element={<TeamPage />} />
         <Route exact path='/avengers' element={<AvengersPage />} />
       </Route>
 

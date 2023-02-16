@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useContext, useEffect } from 'react';
+import { useQuery } from 'react-query';
 
 // context
 import { GlobalContext } from '../context/GlobalContext';
@@ -13,7 +15,7 @@ import { BaseBox, ContentBox } from '../components/Box';
 import { BodyText1, DisplayText } from '../components/Text';
 import { AvengersCard } from '../components/Card';
 import { AvengersCardsGrid } from '../components/Grid';
-import { UnstyledLink } from '../components/Link';
+import { UnstyledLink, UnderlinedTextLink } from '../components/Link';
 
 const data = {
   title: 'The Avengers',
@@ -65,32 +67,64 @@ const data = {
 
 export default function AvengersPage() {
   const { setHeaderTitle } = useContext(GlobalContext);
+  const { data: avengersData, isLoading: isDataLoading } = useQuery(
+    ['avengers'],
+    async () => {
+      const res = await axios.get(`http://localhost:8000/teams/1`);
+      return res.data;
+    }
+  );
+
+  const { data: avengersMembers, isLoading: isMembersLoading } = useQuery(
+    ['avengers_members'],
+    async () => {
+      const res = await axios.get(`http://localhost:8000/teams/1/heroes`);
+      return res.data;
+    }
+  );
 
   useEffect(() => {
-    setHeaderTitle('Avengers - The strongest defense force against threats.');
+    setHeaderTitle("Avengers - The earth's mightiest heroes.");
   }, []);
 
   return (
     <MainContainer>
-      <ContentBox className=''>
-        <AvengersImage src={AvengersLogo} alt='' />
-        <BaseBox>
-          <DisplayText>{data.title}</DisplayText>
-          <BodyText1>{data.description}</BodyText1>
-        </BaseBox>
-      </ContentBox>
+      {isDataLoading ? (
+        <BodyText1>Loading...</BodyText1>
+      ) : (
+        avengersData && (
+          <ContentBox className=''>
+            <AvengersImage src={AvengersLogo} alt='' />
+            <BaseBox>
+              <DisplayText>{avengersData.name}</DisplayText>
+              <BodyText1>{avengersData.description}</BodyText1>
+            </BaseBox>
+          </ContentBox>
+        )
+      )}
 
-      <AvengersCardsGrid>
-        {data.avengers.map(item => (
-          <UnstyledLink to='/avengers/0000001'>
-            <AvengersCard
-              name={item.name}
-              imageUrl={item.avatar}
-              key={item.id}
-            />
-          </UnstyledLink>
-        ))}
-      </AvengersCardsGrid>
+      {isMembersLoading ? (
+        <BodyText1>Loading...</BodyText1>
+      ) : avengersMembers.lenght > 0 ? (
+        <AvengersCardsGrid>
+          {avengersMembers.map(item => (
+            <UnstyledLink to={`/avengers/${item.id}`}>
+              <AvengersCard
+                name={item.name}
+                imageUrl={item.thumbnail}
+                key={item.id}
+              />
+            </UnstyledLink>
+          ))}
+        </AvengersCardsGrid>
+      ) : (
+        <BodyText1>
+          This team still has no heroes, add heroes to this team from the{' '}
+          <UnderlinedTextLink to='/candidates'>
+            candidate list.
+          </UnderlinedTextLink>
+        </BodyText1>
+      )}
     </MainContainer>
   );
 }

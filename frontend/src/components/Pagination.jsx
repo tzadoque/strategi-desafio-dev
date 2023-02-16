@@ -25,16 +25,16 @@ const StyledPagination = styled.div`
   }
 `;
 
-const Pagination = ({ currentPage, prevPageFn, nextPageFn }) => {
+const Pagination = ({ currentPage, prevPageFn, nextPageFn, disabled }) => {
   return (
     <StyledPagination>
-      <PaginationButton>
+      <PaginationButton onClick={prevPageFn} disabled={disabled}>
         <img src={PrevIcon} alt='previous button' />
       </PaginationButton>
 
       <div className='page-indicator'>{currentPage}</div>
 
-      <PaginationButton>
+      <PaginationButton onClick={nextPageFn} disabled={disabled}>
         <img src={NextIcon} alt='next button' />
       </PaginationButton>
     </StyledPagination>
